@@ -32,6 +32,11 @@ public class maximum_in_a_generic_tree{
     }
     public static int maximumvaluenode(Node node){
         int max = Integer.MIN_VALUE;
+        for(Node child: node.children){
+            int cmax = maximumvaluenode(child);
+            max = Math.max(max,cmax);
+        }
+        max = Math.max(node.data,max);
         return max;
     }
     public static void main(String[] args) {
