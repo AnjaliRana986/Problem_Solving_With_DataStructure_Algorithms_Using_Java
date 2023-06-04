@@ -1,7 +1,8 @@
+
 import java.lang.*;
 import java.io.*;
 import java.util.*;
-public class level_order_of_generic_tree{
+public class level_order_linewise1{
     private static class Node{
         int data;
         ArrayList<Node> children = new ArrayList<>();
@@ -28,19 +29,24 @@ public class level_order_of_generic_tree{
 
         return h;
     }
-    public static void levelordertraversal(Node node){
-        Queue<Node> q = new ArrayDeque<>();
-        q.add(node);
-    
-        while(q.size() > 0){
-            node = q.remove();
+    public static void levelordertraversalnextline(Node node){
+        Queue<Node> mq = new ArrayDeque<>();
+        Queue<Node> cq = new ArrayDeque<>();
+        mq.add(node);
+        while(mq.size() > 0 ){
+            node = mq.remove();
             System.out.print(node.data + " ");
             for(Node child: node.children){
-                q.add(child);
+                cq.add(child);
             }
-            
+            if(mq.size() == 0){
+                mq = cq;
+                cq = new ArrayDeque<>();
+                System.out.println();
+            }
         }
-        System.out.println(".");
+        
+        
     }
     public static void main(String[] args) {
         int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1};
@@ -66,6 +72,6 @@ public class level_order_of_generic_tree{
         display(root);
         int h = height(root);
         System.out.println(h);
-        levelordertraversal(root);
+        levelordertraversalnextline(root);
     }
 }
