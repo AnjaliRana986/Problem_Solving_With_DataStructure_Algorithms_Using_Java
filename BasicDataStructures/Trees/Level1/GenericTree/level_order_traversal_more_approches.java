@@ -5,6 +5,12 @@ public class level_order_traversal_more_approches{
     private static class Node{
         int data;
         ArrayList<Node> children = new ArrayList<>();
+        Node(){   // default constructor
+
+        }
+        Node(int data){
+            this.data = data;
+        }
     }
     public static void display(Node node){
         String str  = node.data + "->";
@@ -70,21 +76,21 @@ public class level_order_traversal_more_approches{
             }
         }
     }
-    public static void levelordertravermoreapp(Node node){
+    public static void levelordertravermoreapproach1(Node node){
         Queue<Node> q = new ArrayDeque<>();
          q.add(node);
-         q.add(null);
+         q.add(new Node(-1));
          while(q.size() > 0){
             node = q.remove();
-            if(node != null){
-                System.out.println(node.data + " ");
+            if(node.data != -1){
+                System.out.print(node.data + " ");
                 for(Node child: node.children){
                     q.add(child);
                 }
             }
             else{
                 if(q.size() > 0){
-                    q.add(null);
+                    q.add(new Node(-1));
                     System.out.println();
                 }
             }
@@ -116,6 +122,6 @@ public class level_order_traversal_more_approches{
         System.out.println(h);
         levelordertraversal(root);
         levelorderzigzag(root);
-        levelordertravermoreapp(root);
+        levelordertravermoreapproach1(root);
     }
 }
