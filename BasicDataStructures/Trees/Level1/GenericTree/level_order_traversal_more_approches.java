@@ -96,6 +96,23 @@ public class level_order_traversal_more_approches{
             }
          }
     }
+    public static void levelordertraverapproach2(Node node){
+        System.out.println();
+        // size count approach
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(node);
+        while(q.size() > 0){
+            int countchildofqueue = q.size();
+            for(int i = 0; i < countchildofqueue; i++){
+                 node = q.remove();
+                 System.out.print(node.data + " ");
+                 for(Node child: node.children){
+                    q.add(child);
+                 }
+            }
+            System.out.println();
+        }       
+    }
     public static void main(String[] args) {
         int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1};
         Node root = null;
@@ -123,5 +140,6 @@ public class level_order_traversal_more_approches{
         levelordertraversal(root);
         levelorderzigzag(root);
         levelordertravermoreapproach1(root);
+        levelordertraverapproach2(root);
     }
 }
