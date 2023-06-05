@@ -98,7 +98,7 @@ public class level_order_traversal_more_approches{
     }
     public static void levelordertraverapproach2(Node node){
         System.out.println();
-        // size count approach
+        // queue size count approach
         Queue<Node> q = new ArrayDeque<>();
         q.add(node);
         while(q.size() > 0){
@@ -112,6 +112,35 @@ public class level_order_traversal_more_approches{
             }
             System.out.println();
         }       
+    }
+    
+    private static class Pair{
+        Node node;
+        int level;
+        Pair(Node node, int level){
+            this.node = node;
+            this.level = level;
+        }
+    }
+    public static void levelordertraverseapproach3(Node node){
+        // use pair class approach method
+        Queue<Pair> q = new ArrayDeque<>();
+        q.add(new Pair(node, 1));
+        int level = 1;
+        while(q.size() > 0){
+            Pair p = q.remove();
+            if(p.level > level){
+                level = p.level;
+                System.out.println();
+            }
+            
+                System.out.print(p.node.data + " ");
+                for(Node child: p.node.children){
+                    Pair cp = new Pair(child, p.level + 1);
+                    q.add(cp);
+                }
+        }
+
     }
     public static void main(String[] args) {
         int[] arr = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1};
@@ -141,5 +170,6 @@ public class level_order_traversal_more_approches{
         levelorderzigzag(root);
         levelordertravermoreapproach1(root);
         levelordertraverapproach2(root);
+        levelordertraverseapproach3(root);
     }
 }
