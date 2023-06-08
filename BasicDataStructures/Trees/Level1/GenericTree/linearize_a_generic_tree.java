@@ -39,6 +39,19 @@ public class linearize_a_generic_tree{
         }
         return node;
     }
+    public static Node linearizetremoreapproach(Node node){
+        if(node.children.size() == 0){
+            return node;
+        }
+        Node lkt = linearizetremoreapproach(node.children.get(node.children.size()-1));
+        while(node.children.size() > 1){
+            Node last = node.children.remove(node.children.size()-1);
+            Node sl = node.children.get(node.children.size()-1);
+            Node slkt = linearizetremoreapproach(sl);
+            slkt.children.add(last);
+        }
+        return lkt;
+    }
     
     public static void mirrorimageoftree(Node node){
         for(Node child : node.children){
@@ -67,7 +80,8 @@ public class linearize_a_generic_tree{
         }
         display(root);
        // mirrorimageoftree(root);
-       linearizetree(root);
+       linearizetree(root);   //o(n2)
         display(root);
+        linearizetremoreapproach(root);
     }
 }
