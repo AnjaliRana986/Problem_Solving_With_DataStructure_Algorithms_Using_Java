@@ -1,7 +1,8 @@
 import java.lang.*;
 import java.util.*;
 import java.io.*;
-public class are_tree_similar_in_shapes{
+
+public class are_trees_mirror_in_shape {
     private static class Node{
         int data;
         ArrayList<Node> children = new ArrayList<>();
@@ -56,6 +57,20 @@ public class are_tree_similar_in_shapes{
         }
         return true;
     }
+    public static boolean areTreesmirrorInShape(Node node1, Node node2){
+        if(node1.children.size() != node2.children.size()){
+            return false;
+        }
+        for(int i = 0;i < node1.children.size(); i++){
+            int j = node2.children.size() -1 -i;
+            Node c1 = node1.children.get(i);
+            Node c2 = node2.children.get(j);
+            if(areTreesmirrorInShape(c1, c2) == false){
+                return false;
+            }
+        }
+        return true;
+    }
     public static void main(String[] args){
         int[] arr1 = {10,20,50,-1,60,-1,-1,30,70,-1,80,110,-1,120,-1,-1,90,-1,-1,40,100,-1,-1};
         Node root1 = construct(arr1);
@@ -66,5 +81,7 @@ public class are_tree_similar_in_shapes{
         display(root2);
        boolean shape = areTreeSimilarInshape(root1,root2);
        System.out.println(shape);
+       boolean mirror = areTreesmirrorInShape(root1, root2);
+       System.out.println(mirror);
     }
 }
